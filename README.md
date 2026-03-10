@@ -134,6 +134,38 @@ Neural networks, cosmic patterns, geometric visuals. Perfect as `ai_bg` with ove
 
 ---
 
+## Viral Hook Compositing Pipeline
+
+A two-step pipeline that produces scroll-stopping hook slides matching the visual language of top accounts like @evolving.ai (27.5K likes, 30.1K saves) and @therundownai:
+
+**Step 1:** Generate cinematic base image with Gemini 3 Pro (topic-specific) | **Step 2:** Compose with PIL overlay (gradient + headline + brand + CTA)
+
+<table>
+<tr>
+<td align="center"><img src="docs/images/hook-experiments/hook_multi_person.png" width="200"/><br/><sub>Multi-Person (8.5/10)</sub></td>
+<td align="center"><img src="docs/images/hook-experiments/hook_faceoff.png" width="200"/><br/><sub>Face-Off (8.5/10)</sub></td>
+<td align="center"><img src="docs/images/hook-experiments/hook_portrait.png" width="200"/><br/><sub>Portrait (8/10)</sub></td>
+<td align="center"><img src="docs/images/hook-experiments/hook_silhouette.png" width="200"/><br/><sub>Silhouette (7.5/10)</sub></td>
+</tr>
+</table>
+
+```bash
+# Step 1: Generate base image
+python3 ~/.claude/skills/generate-image/scripts/generate_image.py \
+  "Cinematic photomontage: three figures in dramatic formation..." \
+  --model "google/gemini-3-pro-image-preview" --output hook_base.png
+
+# Step 2: Compose with text overlays
+python3 scripts/compose_hook.py \
+  --base hook_base.png --output hook_final.png \
+  --headline "THE AI WAR JUST ESCALATED" \
+  --brand "YOUR BRAND" --category "AI NEWS"
+```
+
+The compositing script adds: gradient overlays, bold headline, brand watermark, category label, "SWIPE FOR MORE" CTA, and slide counter. All topic-adaptive, not hardcoded.
+
+---
+
 ## 7 Content Archetypes
 
 The skill auto-selects the best archetype based on your topic:
@@ -254,6 +286,7 @@ world-class-carousel/
 │   ├── render_latex_slide.py  # Primary LaTeX renderer (6 slide types)
 │   ├── generate_carousel.py   # Orchestrator (spec -> full carousel)
 │   ├── assemble_carousel.py   # Validation, optimization, preview grid
+│   ├── compose_hook.py        # Viral hook compositing (PIL)
 │   ├── render_slide.py        # Legacy Pillow renderer
 │   └── generate_visuals.py    # AI image generation helper
 ├── docs/
