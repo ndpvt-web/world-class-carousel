@@ -1,0 +1,342 @@
+<p align="center">
+  <img src="docs/images/capybara_mascot.png" alt="World-Class Carousel Generator" width="500"/>
+</p>
+
+<h1 align="center">World-Class Instagram Carousel Generator</h1>
+
+<p align="center">
+  <strong>An AI agent skill that generates publication-ready Instagram carousels on any topic.</strong><br/>
+  7-10 slides at 1080x1350 with AI visuals, LaTeX typography, music recommendations, and optimized captions.
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/slides-1080x1350-blueviolet" alt="Slide Size"/>
+  <img src="https://img.shields.io/badge/renderer-LaTeX%2FTikZ-orange" alt="Renderer"/>
+  <img src="https://img.shields.io/badge/AI%20images-Gemini%203%20Pro-blue" alt="AI Images"/>
+  <img src="https://img.shields.io/badge/themes-4%20built--in-green" alt="Themes"/>
+  <img src="https://img.shields.io/badge/archetypes-7-red" alt="Archetypes"/>
+</p>
+
+---
+
+## Why Carousels?
+
+<p align="center">
+  <img src="docs/images/diagrams/engagement_chart.png" alt="Carousel Engagement Rates" width="500"/>
+</p>
+
+Carousels are the highest-performing format on Instagram. The data is clear:
+
+- **4.7% average engagement** for educational carousels (highest of any format)
+- **95-114% more saves** than static image posts
+- **3.4% save rate** for educational content (saves = algorithm gold)
+- **First slide = 80%** of the engagement decision (made in under 1.5 seconds)
+
+This skill exists because most carousel tools produce generic, forgettable content. This one produces carousels people **save, share, and come back to**.
+
+---
+
+## How It Works: The 6-Phase Pipeline
+
+<p align="center">
+  <img src="docs/images/diagrams/pipeline_flowchart.png" alt="6-Phase Pipeline" width="600"/>
+</p>
+
+| Phase | What Happens | Output |
+|-------|-------------|--------|
+| **1. Research** | Topic analysis, audience mapping, archetype selection, narrative arc | Content outline |
+| **1.5. Visual Strategy** | Decide AI images vs text-only per slide, theme, background style | Visual plan |
+| **2. Content** | Write each slide, run Bullshit Test, map to renderer data format | Slide JSON files |
+| **3. Rendering** | LaTeX pipeline: TikZ + pdflatex + pdftoppm at 300 DPI | 1080x1350 PNGs |
+| **4. Music** | Match content type to Instagram music library tracks | 2-3 track recs |
+| **5. Quality** | Visual inspection, checklist verification, re-render failures | Final carousel |
+
+The rendering pipeline produces output that matches or exceeds accounts with 1M+ followers (Chase AI, Analytics Vidhya, etc.) because it uses the same typesetting engine that produces academic papers and books.
+
+---
+
+## 6 Slide Types
+
+<p align="center">
+  <img src="docs/images/diagrams/slide_types.png" alt="6 Slide Types" width="600"/>
+</p>
+
+| Type | Purpose | Visual Strategy |
+|------|---------|----------------|
+| **Hook** | Scroll-stopping first impression | AI background + 0.60-0.68 overlay |
+| **Body** | Content-heavy knowledge delivery | Text-only with gradient background |
+| **Comparison** | Side-by-side analysis | Multi-column layout, text-only |
+| **Diagram** | Architecture, workflows, processes | AI-generated flowchart (preferred) or TikZ |
+| **Synthesis** | Save-worthy numbered summary | Text-only, numbered points |
+| **CTA** | Call to action, emotional close | AI background + 0.65-0.70 overlay |
+
+### The Proven Formula (8-Slide Format)
+
+```
+Hook (ai_bg) -> Body -> Body -> Body -> Body -> Diagram (ai_bg) -> Synthesis -> CTA (ai_bg)
+```
+
+This structure was established through controlled A/B experiments. Key finding: **images on body slides destroy 40% of content space for minimal gain**. Text-only body slides scored 8.3/10 vs 5.7/10 with images.
+
+---
+
+## Example Carousel Output
+
+Here is a complete 8-slide carousel on "The AI War of 2025" rendered with this skill:
+
+<table>
+<tr>
+<td align="center"><img src="docs/images/examples/v3_01_hook.png" width="150"/><br/><sub>Hook</sub></td>
+<td align="center"><img src="docs/images/examples/v3_02_body.png" width="150"/><br/><sub>Body 1</sub></td>
+<td align="center"><img src="docs/images/examples/v3_03_body.png" width="150"/><br/><sub>Body 2</sub></td>
+<td align="center"><img src="docs/images/examples/v3_04_body.png" width="150"/><br/><sub>Body 3</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="docs/images/examples/v3_05_body.png" width="150"/><br/><sub>Body 4</sub></td>
+<td align="center"><img src="docs/images/examples/v3_06_diagram.png" width="150"/><br/><sub>Diagram</sub></td>
+<td align="center"><img src="docs/images/examples/v3_07_synthesis.png" width="150"/><br/><sub>Synthesis</sub></td>
+<td align="center"><img src="docs/images/examples/v3_08_cta.png" width="150"/><br/><sub>CTA</sub></td>
+</tr>
+</table>
+
+Notice: Hook and CTA use full-bleed AI backgrounds for scroll-stopping power. Body slides are text-only with gradient backgrounds for maximum readability. The diagram uses TikZ vector graphics.
+
+---
+
+## AI Image Generation Capabilities
+
+This skill uses **Gemini 3 Pro** (via the `generate-image` skill) for AI-generated visuals. Here are experimentally verified capabilities:
+
+### Cinematic Portraits
+<img src="docs/images/capabilities/cinematic_portrait.png" width="400"/>
+
+Best for hook and CTA backgrounds. Hyper-detailed prompts (50+ words) produce stunning atmospheric images.
+
+### Flowcharts & Process Diagrams
+<img src="docs/images/capabilities/flowchart.png" width="400"/>
+
+Game-changer for diagram slides. Gemini 3 Pro renders clean boxes, arrows, and **readable text labels** -- replacing TikZ for complex flows.
+
+### Architecture Diagrams
+<img src="docs/images/capabilities/architecture.png" width="400"/>
+
+Blueprint-style system diagrams with proper components and connections. Ideal for tech/system design carousels.
+
+### Data Infographics & Bar Charts
+<img src="docs/images/capabilities/infographic.png" width="400"/>
+
+Accurate data visualization with labels, proportions, and colors. Specify exact numbers in the prompt for best results.
+
+### Abstract Backgrounds
+<img src="docs/images/capabilities/abstract_neural.png" width="400"/>
+
+Neural networks, cosmic patterns, geometric visuals. Perfect as `ai_bg` with overlay for any slide type.
+
+---
+
+## 7 Content Archetypes
+
+The skill auto-selects the best archetype based on your topic:
+
+| Archetype | Best For | Example |
+|-----------|----------|---------|
+| **Tutorial** | Step-by-step how-to | "Deploy with Vercel in 5 minutes" |
+| **Framework** | Reusable mental models | "The 3-layer content system" |
+| **Myth-Buster** | Correcting common beliefs | "Stop using RAG. There's a better way." |
+| **Case Study** | Success stories with data | "How we grew from 0 to 10K users" |
+| **Curated List** | Top N tools/resources | "6 AI tools that will replace your stack" |
+| **Deep Dive** | Complex concept explained | "How transformers actually work" |
+| **Transformation** | Before/after journey | "From burnout to 4-hour workdays" |
+
+Each archetype defines: slide structure, value test, hook pattern, and music profile.
+
+---
+
+## 4 Color Themes
+
+| Theme | Background | Accent | Best For |
+|-------|-----------|--------|----------|
+| `dark` | Deep indigo `#0D1117` | Electric purple `#7C3AED` | Tech, AI, coding |
+| `warm` | Parchment `#F5F0EB` | Terracotta `#B45309` | Mindset, philosophy |
+| `clean` | White `#FFFFFF` | Trust blue `#2563EB` | Education, tutorials |
+| `earth` | Sage `#1B3A2D` | Gold `#16A34A` | Business, strategy |
+
+Themes are auto-detected from topic keywords or set via brand config.
+
+---
+
+## Brand Configuration
+
+Every visual element is customizable through JSON brand configs:
+
+```json
+{
+  "name": "TechStack AI",
+  "logo": "path/to/logo.png",
+  "theme": "dark",
+  "accent_override": "6366F1",
+  "font_serif": "newpxtext",
+  "header_style": "bold",
+  "nav_style": "circle",
+  "divider_style": "line",
+  "corner_radius": "6pt"
+}
+```
+
+This means one skill serves unlimited brands -- just swap the config file.
+
+---
+
+## The Bullshit Test (Quality Gate)
+
+Every slide must pass ALL 3 conditions before rendering:
+
+| Condition | Question | FAIL Example | PASS Example |
+|-----------|----------|-------------|-------------|
+| **Specificity** | Could someone with zero knowledge guess this? | "Use the right tools" | "Obsidian's graph view lets Claude traverse 10x more docs" |
+| **Novelty** | Has the viewer seen this before? | "AI is changing the world" | "Bidirectional links turn the context window into a navigation system" |
+| **Density** | Can it be compressed further? | "There are many benefits including several key advantages" | "3 benefits: 10x nav, auto-linked memory, zero-config" |
+
+If a slide fails any condition, it gets rewritten. No exceptions.
+
+---
+
+## Quick Start
+
+### Prerequisites
+
+- **Python 3.10+**
+- **LaTeX** (`pdflatex` with TikZ, microtype, fontenc packages)
+- **pdftoppm** (from poppler-utils)
+- **Pillow** (Python imaging)
+- **AI_GATEWAY_API_KEY** environment variable (for Gemini 3 Pro image generation)
+
+### Render a Single Slide
+
+```bash
+python3 scripts/render_latex_slide.py \
+  --type hook \
+  --data hook_data.json \
+  --output slide_01.png \
+  --theme dark \
+  --brand brand.json
+```
+
+### Generate a Full Carousel
+
+```bash
+python3 scripts/generate_carousel.py \
+  --spec carousel_spec.json \
+  --output-dir outputs/ \
+  --brand brand.json
+```
+
+### Generate AI Images
+
+```bash
+python3 ~/.claude/skills/generate-image/scripts/generate_image.py \
+  "Dramatic cinematic composition, glowing neon circuits, volumetric lighting, \
+  deep indigo and purple tones, no text no words no letters" \
+  --model "google/gemini-3-pro-image-preview" \
+  --output hook_bg.png
+```
+
+---
+
+## Project Structure
+
+```
+world-class-carousel/
+├── README.md                  # This file
+├── SKILL.md                   # Full skill specification (agent instructions)
+├── KNOWN_ISSUES.md            # Compressed rules from 8+ sessions
+├── scripts/
+│   ├── render_latex_slide.py  # Primary LaTeX renderer (6 slide types)
+│   ├── generate_carousel.py   # Orchestrator (spec -> full carousel)
+│   ├── assemble_carousel.py   # Validation, optimization, preview grid
+│   ├── render_slide.py        # Legacy Pillow renderer
+│   └── generate_visuals.py    # AI image generation helper
+├── docs/
+│   └── images/                # README images and examples
+├── templates/                 # Starter templates
+└── references/                # Research references
+```
+
+---
+
+## Key Design Decisions
+
+### Why LaTeX Instead of HTML/Pillow?
+
+| Feature | LaTeX | HTML Canvas | Pillow |
+|---------|-------|-------------|--------|
+| Line breaking | Knuth-Plass optimal | CSS heuristic | Manual |
+| Font kerning | Professional (microtype) | Basic | None |
+| Vector diagrams | TikZ (native) | SVG (external) | Raster only |
+| Typography quality | Publication-grade | Web-grade | Basic |
+| Reproducibility | Deterministic | Browser-dependent | Deterministic |
+
+### Why AI Images Over Screenshots?
+
+Screenshots were tested extensively and abandoned. They consistently look terrible: low resolution, poorly framed, badly integrated. AI-generated images via Gemini 3 Pro produce far superior results -- cinematic quality, perfect framing, consistent style.
+
+### Why Text-Only Body Slides?
+
+A/B tested across 7 visual strategies with identical content, scored 1-10:
+
+| Strategy | Score |
+|----------|-------|
+| Text-only body + AI hook/CTA | **8.3/10** |
+| AI images on every slide | 5.7/10 |
+| Screenshots on tool slides | 4.2/10 |
+
+Images on body slides destroy 40% of content space for minimal visual gain. The text IS the value. Let it breathe.
+
+---
+
+## Instagram Algorithm Optimization
+
+Built-in optimization for the Instagram algorithm:
+
+- **Save Rate** is the #1 signal -- every carousel includes a save-worthy synthesis slide
+- **10-slide carousels** outperform shorter ones by ~30% in save rate
+- **Music** adds 15-30% reach boost -- skill includes music recommendations per content type
+- **First hour** saves get exponential distribution -- carousels are designed for immediate impact
+- **Hashtag strategy**: 5-15 with distribution across broad, niche, community, and branded
+
+---
+
+## Learning System
+
+The skill has a two-tier memory architecture that improves with every use:
+
+**Tier 1: `KNOWN_ISSUES.md`** -- Max 60 lines of compressed, actionable rules. Read at the start of every session. Rules get replaced, never appended.
+
+**Tier 2: `session-archives/`** -- Verbose session logs with full experiment data. Never loaded into context unless explicitly requested.
+
+The compression principle: every lesson must be reduced to its irreducible form before entering Tier 1.
+
+---
+
+## Contributing
+
+This skill was built through iterative experimentation -- each session produces carousels, scores them, and distills the lessons into rules. The best way to contribute:
+
+1. Use the skill to generate carousels on different topics
+2. Score the output honestly (1-10 on each slide)
+3. Identify patterns that work vs fail
+4. Compress findings into one-line rules
+5. Submit as additions to `KNOWN_ISSUES.md`
+
+---
+
+## License
+
+MIT
+
+---
+
+<p align="center">
+  <em>Built with first-principles reasoning. Every decision traces to an axiom.</em><br/>
+  <em>Content people save, share, and come back to. Not engagement bait. Not AI slop.</em>
+</p>
