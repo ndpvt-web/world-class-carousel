@@ -498,43 +498,80 @@ The `compose_hook.py` script adds:
 
 When the topic involves **specific real people** (Sam Altman, Elon Musk, Jensen Huang, etc.), use web-sourced Creative Commons photos instead of AI generation:
 
-**Winning Approach: transform_image.py with real photo URLs (9.5/10)**
+**BEST Approach: Base64 multi-image via AI Gateway (10/10)**
+
+Send local photos as base64 data URIs to `/api/v1/images/generations`. This bypasses URL accessibility issues (Wikimedia blocked, etc.) and supports ALL local images including 3+ people.
+
+```python
+import base64, json, os
+from pathlib import Path
+from urllib import request
+
+API_KEY = os.environ["AI_GATEWAY_API_KEY"]
+BASE = "https://ai-gateway.happycapy.ai/api/v1"  # NOT /openai/v1 !
+
+# Load photos as base64 data URIs
+images_b64 = []
+for photo in ["elon_musk.jpg", "jensen_huang.jpg", "sam_altman.jpg"]:
+    data = base64.b64encode(Path(photo).read_bytes()).decode()
+    images_b64.append(f"data:image/jpeg;base64,{data}")
+
+payload = {
+    "model": "google/gemini-3-pro-image-preview",
+    "prompt": "Create a dramatic face-off style composition with these three tech leaders. "
+              "Confrontational layout, intense red vs blue split lighting, dark background "
+              "with smoke/particle effects. Faces must remain photorealistic and recognizable.",
+    "images": images_b64,
+    "response_format": "url",
+    "n": 1
+}
+
+req = request.Request(
+    f"{BASE}/images/generations",
+    data=json.dumps(payload).encode(),
+    headers={
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {API_KEY}",
+        "Origin": "https://trickle.so"
+    },
+    method="POST"
+)
+with request.urlopen(req, timeout=180) as resp:
+    result = json.loads(resp.read())
+    img_url = result["data"][0]["url"]
+    # Download and save...
+```
+
+CRITICAL: Use `/api/v1/images/generations` (NOT `/api/v1/openai/v1/images/generations`). The OpenAI-prefixed endpoint rejects the `images` parameter.
+
+**Alternative: transform_image.py with Flickr URLs (9.5/10)**
+
+When photos are available at Flickr URLs (directly accessible by Vertex AI):
 
 ```bash
-# Step 1: Find CC-licensed photos on Flickr/Wikimedia for topic-relevant people
-# Step 2: Feed photo URLs directly to transform_image.py
 python3 ~/.claude/skills/generate-image/scripts/transform_image.py \
   "Create a dramatic cinematic photomontage combining these tech leaders. \
-  Portrait format (3:4). Dark dramatic background with blue and red lighting. \
-  Triangular power composition. Keep faces EXACTLY as they appear. \
-  Bottom third dark for text overlay. Magazine cover quality." \
+  Dark dramatic background with blue and red lighting. Keep faces EXACTLY as they appear." \
   "https://live.staticflickr.com/7832/33377877458_d1a3774615_b.jpg" \
   "https://live.staticflickr.com/5767/30796823531_85932ecaa0_b.jpg" \
   --model "google/gemini-3-pro-image-preview" \
   --output tmp/carousel/hook_base.png
-
-# Step 3: Apply compose_hook.py text overlay
-python3 scripts/compose_hook.py \
-  --base tmp/carousel/hook_base.png \
-  --output tmp/carousel/slide_01_hook.png \
-  --headline "THE AI WAR JUST ESCALATED" \
-  --brand "YOUR BRAND" --category "AI NEWS"
 ```
 
 **Photo sourcing rules:**
 - Use Creative Commons (CC BY 2.0+) photos from Flickr, Wikimedia Commons
-- URLs must be directly accessible by Vertex AI (Flickr works, Wikimedia often blocked)
-- Use `urllib.request` with browser User-Agent for Wikimedia downloads
+- Flickr URLs accessible by Vertex AI; Wikimedia URLs often blocked
+- Use `urllib.request` with browser User-Agent for Wikimedia downloads to local files
+- For local-only files (Wikimedia downloads), use the base64 approach above
 - Include CC attribution in carousel caption
-- The AI model preserves original faces while adding cinematic composition and lighting
 
 **Fallback: PIL rembg composite (7/10)**
-If transform_image.py is unavailable, use `rembg` to remove backgrounds from downloaded photos, then composite onto AI-generated background with PIL:
 ```bash
 pip install rembg  # One-time setup
-python3 -c "from rembg import remove; ..."  # Remove backgrounds
-# Then use PIL to composite onto AI background + compose_hook.py overlay
+# Remove backgrounds, composite onto AI background, apply compose_hook.py overlay
 ```
+
+**nano-banana-pro status:** The native google-genai SDK requires GEMINI_API_KEY (not set). The AI Gateway has no Gemini-native endpoint, so routing the SDK through the gateway fails (404). The base64 approach above achieves the same multi-image composition capability via the AI Gateway's image generation endpoint.
 
 ### PHASE 4: MUSIC SELECTION
 

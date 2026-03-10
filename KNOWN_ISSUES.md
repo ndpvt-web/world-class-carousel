@@ -24,9 +24,11 @@
 ## VISUAL STRATEGY (Experimentally Verified)
 - Hook slides: `ai_bg` full-bleed + 0.60-0.68 overlay. Use compose_hook.py for viral-style overlays.
 - VIRAL HOOK PIPELINE: AI base -> compose_hook.py (PIL gradient+headline+brand+CTA). Prompt by topic type.
-- REAL FACES: Use transform_image.py with CC-licensed Flickr URLs (9.5/10). Gemini preserves original faces.
-- Flickr URLs work with Vertex AI; Wikimedia URLs are blocked. Use urllib for Wikimedia downloads.
-- Fallback for real faces: rembg (pip install rembg) + PIL composite onto AI background (7/10).
+- REAL FACES BEST: Base64 multi-image via /api/v1/images/generations (10/10). Sends local photos as data URIs. All 3+ faces in one composition.
+- REAL FACES ALT: transform_image.py with CC-licensed Flickr URLs (9.5/10). Limited to URL-accessible photos only.
+- Flickr URLs work with Vertex AI; Wikimedia URLs blocked. Use urllib for Wikimedia downloads.
+- Base64 data URIs WORK at /api/v1/images/generations (NOT /api/v1/openai/v1/). Correct endpoint is critical.
+- Fallback: rembg + PIL composite onto AI background (7/10).
 - Body slides: ALWAYS text-only. Images destroy 40% content space for minimal gain.
 - CTA slides: `ai_bg` full-bleed + 0.65-0.70 overlay for emotional close.
 - Diagram: TikZ or AI-generated flowchart as `ai_bg`. Synthesis: text-only.
@@ -34,7 +36,7 @@
 - Text-only slides: always use `"bg_style": "gradient"` in data JSON.
 
 ## AI IMAGE GENERATION (Gemini 3 Pro via generate-image skill)
-- Use `generate-image` skill (AI_GATEWAY_API_KEY). Nano-banana-pro needs GEMINI_API_KEY (often unset).
+- Use `generate-image` skill (AI_GATEWAY_API_KEY). Nano-banana-pro native SDK needs GEMINI_API_KEY (unset; gateway has no Gemini-native endpoint).
 - Model: `google/gemini-3-pro-image-preview`. Fallback: `gemini-3.1-flash-image-preview`.
 - HYPER-DETAILED prompts (50+ words): materials, lighting, composition, colors, atmosphere. Generic = bad.
 - All images output ~1408x768 (landscape). Overlay compensates for portrait stretch on slides.

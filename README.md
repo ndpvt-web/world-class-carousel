@@ -164,35 +164,53 @@ python3 scripts/compose_hook.py \
 
 The compositing script adds: gradient overlays, bold headline, brand watermark, category label, "SWIPE FOR MORE" CTA, and slide counter. All topic-adaptive, not hardcoded.
 
-### Real-Face Hook Pipeline (9.5/10)
+### Real-Face Hook Pipeline (10/10)
 
 For news/current events topics featuring **real recognizable people**, use web-sourced Creative Commons photos instead of AI generation:
 
 <table>
 <tr>
-<td align="center"><img src="docs/images/real-faces/pil_composite.png" width="180"/><br/><sub>A: PIL rembg (7/10)</sub></td>
-<td align="center"><img src="docs/images/real-faces/transform_1url.png" width="180"/><br/><sub>B: Transform 1 URL (9/10)</sub></td>
-<td align="center"><img src="docs/images/real-faces/transform_2urls_best.png" width="180"/><br/><sub>B v2: Transform 2 URLs (9.5/10)</sub></td>
+<td align="center"><img src="docs/images/real-faces/pil_composite.png" width="150"/><br/><sub>A: PIL rembg (7/10)</sub></td>
+<td align="center"><img src="docs/images/real-faces/transform_2urls_best.png" width="150"/><br/><sub>B: Flickr URLs (9.5/10)</sub></td>
+<td align="center"><img src="docs/nano_path4_3photos_thumb.png" width="150"/><br/><sub>C: Base64 3 photos (9/10)</sub></td>
+<td align="center"><img src="docs/nano_path4_v2_faceoff_thumb.png" width="150"/><br/><sub>D: Base64 face-off (10/10)</sub></td>
 </tr>
 </table>
 
-**Winning approach**: Feed CC-licensed Flickr photo URLs directly to `transform_image.py` -- Gemini Pro creates a cinematic photomontage while **preserving the original faces exactly**. Then apply `compose_hook.py` for text overlays.
+**Winning approach: Base64 multi-image via AI Gateway** -- Send local photos as base64 data URIs to `/api/v1/images/generations`. This bypasses URL accessibility issues and supports ALL local images including 3+ people. Gemini Pro creates movie-poster-quality compositions while **preserving the original faces exactly**.
 
-```bash
-# Feed real photo URLs to AI for cinematic compositing
-python3 ~/.claude/skills/generate-image/scripts/transform_image.py \
-  "Create dramatic cinematic photomontage of these tech leaders. \
-  Dark background, blue/red lighting. Keep faces EXACTLY as they appear." \
-  "https://live.staticflickr.com/7832/33377877458_d1a3774615_b.jpg" \
-  "https://live.staticflickr.com/5767/30796823531_85932ecaa0_b.jpg" \
-  --model "google/gemini-3-pro-image-preview" --output hook_base.png
+```python
+import base64, json, os
+from pathlib import Path
+from urllib import request
 
-# Apply text overlay
-python3 scripts/compose_hook.py --base hook_base.png --output hook.png \
-  --headline "THE AI WAR JUST ESCALATED" --brand "YOUR BRAND" --category "AI NEWS"
+API_KEY = os.environ["AI_GATEWAY_API_KEY"]
+BASE = "https://ai-gateway.happycapy.ai/api/v1"  # NOT /openai/v1!
+
+images_b64 = []
+for photo in ["elon_musk.jpg", "jensen_huang.jpg", "sam_altman.jpg"]:
+    data = base64.b64encode(Path(photo).read_bytes()).decode()
+    images_b64.append(f"data:image/jpeg;base64,{data}")
+
+payload = {
+    "model": "google/gemini-3-pro-image-preview",
+    "prompt": "Create a dramatic face-off composition with these tech leaders...",
+    "images": images_b64,
+    "response_format": "url", "n": 1
+}
+
+req = request.Request(f"{BASE}/images/generations",
+    data=json.dumps(payload).encode(),
+    headers={"Content-Type": "application/json",
+             "Authorization": f"Bearer {API_KEY}",
+             "Origin": "https://trickle.so"},
+    method="POST")
+# ... download result
 ```
 
-Key insight: This is an **image sourcing + compositing problem**, not an AI generation problem. The faces come from the web; AI only handles composition and lighting.
+**Alternative**: For photos with accessible Flickr URLs, use `transform_image.py` directly (9.5/10).
+
+Key insight: This is an **image sourcing + compositing problem**, not an AI generation problem. The faces come from the web; AI only handles composition and lighting. The critical endpoint is `/api/v1/images/generations` (NOT the `/openai/v1/` prefix).
 
 ---
 
