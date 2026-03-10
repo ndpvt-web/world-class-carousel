@@ -433,6 +433,109 @@ python3 ~/.claude/skills/generate-image/scripts/generate_image.py \
 
 **Key rules**: Always add "no text, no words, no letters" unless the image IS a diagram with labels. Use hyper-detailed prompts (50+ words) for best results.
 
+#### Viral Hook Compositing Pipeline (PIL)
+
+For viral-style hook slides matching accounts like @evolving.ai and @therundownai, use a two-step pipeline:
+
+**Step 1: Generate cinematic base image** with Gemini 3 Pro (topic-specific, dramatic composition):
+```bash
+# Multi-person composition (best for news/war/rivalry topics)
+python3 ~/.claude/skills/generate-image/scripts/generate_image.py \
+  "Cinematic photomontage: three powerful figures in dramatic formation, \
+  center figure is a humanoid AI robot with glowing eyes, flanking figures \
+  are business leaders in dark suits, red and blue dramatic lighting, \
+  dark moody background, editorial magazine composition, hyper-detailed" \
+  --model "google/gemini-3-pro-image-preview" --output tmp/carousel/hook_base.png
+
+# Single portrait (best for profile/biography/interview topics)
+python3 ~/.claude/skills/generate-image/scripts/generate_image.py \
+  "Editorial portrait: distinguished elder with glasses, warm ambient lighting, \
+  slightly blurred conference background, shallow depth of field, \
+  photojournalistic style, natural expression, cinematic color grading" \
+  --model "google/gemini-3-pro-image-preview" --output tmp/carousel/hook_base.png
+
+# Face-off composition (best for comparison/versus topics)
+python3 ~/.claude/skills/generate-image/scripts/generate_image.py \
+  "Dramatic face-off: two opposing figures in profile facing each other, \
+  one in cool blue lighting one in warm orange, city skyline between them, \
+  energy effects and particles, dark cinematic atmosphere, epic confrontation" \
+  --model "google/gemini-3-pro-image-preview" --output tmp/carousel/hook_base.png
+```
+
+**Step 2: Compose with PIL overlay** (gradient + headline + brand + CTA):
+```bash
+python3 scripts/compose_hook.py \
+  --base tmp/carousel/hook_base.png \
+  --output tmp/carousel/slide_01_hook.png \
+  --headline "THE AI WAR JUST ESCALATED" \
+  --subhead "3 moves that changed everything this week" \
+  --brand "YOUR BRAND" \
+  --category "AI NEWS"
+```
+
+The `compose_hook.py` script adds:
+- Bottom gradient overlay (0-220 alpha, ease-in curve) for text readability
+- Light top gradient for brand area
+- Category label (upper-left, e.g., "AI NEWS")
+- Brand watermark (centered)
+- Word-wrapped bold headline (bottom area, all-caps)
+- Optional subheadline
+- "SWIPE FOR MORE" CTA with decorative line
+- Slide counter (top-right, "1/8")
+
+**Prompt Strategy by Topic Type:**
+
+| Topic Type | Base Image Style | Score |
+|---|---|---|
+| News/current events | Multi-person photomontage + robot | 8.5/10 |
+| Comparison/versus | Face-off composition with opposing energy | 8.5/10 |
+| Profile/biography | Single editorial portrait | 8/10 |
+| Tools/abstract | Silhouette with holographic/tech backdrop | 7.5/10 |
+
+**For educational/tutorial/framework topics**, AI-generated compositions work excellently (8-8.5/10).
+
+#### Real-Face Hook Pipeline (for news/current events topics)
+
+When the topic involves **specific real people** (Sam Altman, Elon Musk, Jensen Huang, etc.), use web-sourced Creative Commons photos instead of AI generation:
+
+**Winning Approach: transform_image.py with real photo URLs (9.5/10)**
+
+```bash
+# Step 1: Find CC-licensed photos on Flickr/Wikimedia for topic-relevant people
+# Step 2: Feed photo URLs directly to transform_image.py
+python3 ~/.claude/skills/generate-image/scripts/transform_image.py \
+  "Create a dramatic cinematic photomontage combining these tech leaders. \
+  Portrait format (3:4). Dark dramatic background with blue and red lighting. \
+  Triangular power composition. Keep faces EXACTLY as they appear. \
+  Bottom third dark for text overlay. Magazine cover quality." \
+  "https://live.staticflickr.com/7832/33377877458_d1a3774615_b.jpg" \
+  "https://live.staticflickr.com/5767/30796823531_85932ecaa0_b.jpg" \
+  --model "google/gemini-3-pro-image-preview" \
+  --output tmp/carousel/hook_base.png
+
+# Step 3: Apply compose_hook.py text overlay
+python3 scripts/compose_hook.py \
+  --base tmp/carousel/hook_base.png \
+  --output tmp/carousel/slide_01_hook.png \
+  --headline "THE AI WAR JUST ESCALATED" \
+  --brand "YOUR BRAND" --category "AI NEWS"
+```
+
+**Photo sourcing rules:**
+- Use Creative Commons (CC BY 2.0+) photos from Flickr, Wikimedia Commons
+- URLs must be directly accessible by Vertex AI (Flickr works, Wikimedia often blocked)
+- Use `urllib.request` with browser User-Agent for Wikimedia downloads
+- Include CC attribution in carousel caption
+- The AI model preserves original faces while adding cinematic composition and lighting
+
+**Fallback: PIL rembg composite (7/10)**
+If transform_image.py is unavailable, use `rembg` to remove backgrounds from downloaded photos, then composite onto AI-generated background with PIL:
+```bash
+pip install rembg  # One-time setup
+python3 -c "from rembg import remove; ..."  # Remove backgrounds
+# Then use PIL to composite onto AI background + compose_hook.py overlay
+```
+
 ### PHASE 4: MUSIC SELECTION
 
 Select from Instagram's available music library. Do NOT generate music. Apply the Music Decision Matrix to recommend 2-3 specific tracks the user can search for on Instagram.

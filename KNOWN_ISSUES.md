@@ -22,14 +22,15 @@
 - Body bullets: max 3-4 per slide for readability at mobile size.
 
 ## VISUAL STRATEGY (Experimentally Verified)
-- Hook slides: `ai_bg` full-bleed + 0.60-0.68 overlay for scroll-stopping
-- DO NOT use browser screenshots on slides. They look terrible. Use AI-generated images or text-only.
-- DO NOT use tool slide type for content. Use body slides instead. Proven formula wins.
+- Hook slides: `ai_bg` full-bleed + 0.60-0.68 overlay. Use compose_hook.py for viral-style overlays.
+- VIRAL HOOK PIPELINE: AI base -> compose_hook.py (PIL gradient+headline+brand+CTA). Prompt by topic type.
+- REAL FACES: Use transform_image.py with CC-licensed Flickr URLs (9.5/10). Gemini preserves original faces.
+- Flickr URLs work with Vertex AI; Wikimedia URLs are blocked. Use urllib for Wikimedia downloads.
+- Fallback for real faces: rembg (pip install rembg) + PIL composite onto AI background (7/10).
 - Body slides: ALWAYS text-only. Images destroy 40% content space for minimal gain.
-- CTA slides: `ai_bg` full-bleed + 0.65-0.70 overlay for emotional close
-- Diagram/Synthesis: Text-only (TikZ for diagrams)
-- Abstract patterns > figurative images for text readability. Always prompt "no text".
-- NEVER use texture/paper bg_style. Grey rock look is terrible. Default is now `gradient`.
+- CTA slides: `ai_bg` full-bleed + 0.65-0.70 overlay for emotional close.
+- Diagram: TikZ or AI-generated flowchart as `ai_bg`. Synthesis: text-only.
+- NEVER use texture/paper bg_style or browser screenshots. Default is `gradient`.
 - Text-only slides: always use `"bg_style": "gradient"` in data JSON.
 
 ## AI IMAGE GENERATION (Gemini 3 Pro via generate-image skill)
