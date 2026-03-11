@@ -250,32 +250,54 @@ Single-person portrait + bold headline compositor (`compose_news_hook.py`). AI t
 
 ---
 
-## 10 Content Categories (Tested Visual DNA)
+## 10 Content Categories with Unique Design Languages
 
-Each category has a unique visual identity, tested and verified across hook images, body slides, and specialty slides. Average hook quality: **9.4/10**.
+Each category has a **complete, unique visual design language** -- not just different colors, but different typography, layout geometry, decorative grammar, information density, depth model, and visual rhythm. Derived from 7 independent perceptual axes using Aristotelian first-principles reasoning.
+
+### The 7-Axis Design Language System
+
+Every design language varies across 7 independent perceptual axes. **No two categories share values on more than 2 axes** (mathematically verified):
+
+| Axis | What It Controls | Example Range |
+|------|-----------------|---------------|
+| **Color Palette** | Background, text, accent, gradient | Ivory/navy to deep-space/violet |
+| **Typography** | Font family, weight, spacing | Palatino serif to Inconsolata mono |
+| **Layout Geometry** | Alignment, cards, margins | Academic journal to Bloomberg terminal |
+| **Decorative Grammar** | Corners, borders, patterns, dividers | Pill badges to sharp angular edges |
+| **Information Density** | Whitespace, breathing room | Airy academic to dense reference |
+| **Depth Model** | Shadows, layering, glass effects | Flat print to glass morphism |
+| **Visual Rhythm** | Element repetition, flow | Strict grid to organic floating |
 
 ### All 10 Hook Slides
 
-<img src="docs/category_hooks_grid.png" width="100%" alt="10 content category hook slides: Paper Decoder, Tool Showdown, Breaking News, Tool Tutorial, Hot Take, Prompt Playbook, Industry Map, Build This, Founders & Money, Future Scenario"/>
+<img src="docs/category_hooks_grid.png" width="100%" alt="10 content category hook slides"/>
 
-| # | Category | Theme | Hook Style | Score | Primary Psychology |
-|---|----------|-------|-----------|-------|-------------------|
-| 1 | **Paper Decoder** | dark | Author portrait + floating paper panel | 9.5 | Authority (Cialdini) |
-| 2 | **Tool Showdown** | dark | Multi-screenshot face-off, split colors | 9.5 | Social Proof |
-| 3 | **Breaking News** | dark | Editorial portrait, red urgency accent | 9.0 | Scarcity/Urgency |
-| 4 | **Tool Tutorial** | clean | Phone-in-hand with app UI | 9.5 | Reciprocity |
-| 5 | **Hot Take** | dark | Abstract explosive dark energy | 9.0 | Controversy/Von Restorff |
-| 6 | **Prompt Playbook** | warm | Phone on desk, golden spotlight | 9.5 | Reciprocity |
-| 7 | **Industry Map** | dark | Multi-founder panoramic + data | 10.0 | Authority |
-| 8 | **Build This** | clean | Multi-device mockup, teal blueprint | 9.5 | Social Proof |
-| 9 | **Founders & Money** | earth | Founder portrait + green data panel | 9.5 | Authority |
-| 10 | **Future Scenario** | dark | Abstract futuristic aurora landscape | 9.0 | Awe/Curiosity |
+| # | Category | Font | Accent | Corners | Depth | Real-World Precedent |
+|---|----------|------|--------|---------|-------|---------------------|
+| 1 | **Paper Decoder** | Palatino serif | Navy #1A3A5C | Small 3pt | Flat | Scientific journals |
+| 2 | **Tool Showdown** | Roboto bold | Orange #FF6B2C | Sharp 0pt | Layered | ESPN scorecards |
+| 3 | **Breaking News** | Helvetica condensed | Red #DC2626 | Sharp 0pt | Flat | CNN/BBC ticker |
+| 4 | **Tool Tutorial** | Cabin humanist | Green #16A34A | Pill 12pt | Subtle | Duolingo/Notion |
+| 5 | **Hot Take** | Avant Garde heavy | Yellow #EAB308 | Sharp 0pt | Flat | Protest posters |
+| 6 | **Prompt Playbook** | Inconsolata mono | Rust #B45309 | Tiny 2pt | Subtle | Recipe cards/terminal |
+| 7 | **Industry Map** | OpenSans technical | Blue #3B82F6 | Tiny 2pt | Layered | Bloomberg terminal |
+| 8 | **Build This** | Charter geometric | Teal #0D9488 | Small 4pt | Subtle | Architecture blueprints |
+| 9 | **Founders & Money** | Palatino elegant | Green #166534 | Hair 1pt | Flat | Financial Times/WSJ |
+| 10 | **Future Scenario** | Bookman readable | Violet #A78BFA | Soft 10pt | Glass | Planetarium/Apple keynote |
 
-### Full Comparison (Hook + Body + Specialty)
+### Body Slide Comparison (v2 -- Unique Design Languages)
 
-<img src="docs/category_full_comparison.png" width="100%" alt="Full 10-category comparison: hook slides, body slides, and specialty slides"/>
+<img src="docs/v2_body_comparison.png" width="100%" alt="v2: 10 unique body slide design languages -- each instantly recognizable"/>
 
-Each category maps to a unique position in 4D space: Temporal (breaking-to-evergreen), Complexity (simple-to-deep), Emotion (practical-to-awe), Social (private-save-to-public-share). Full category framework in [CATEGORIES.md](CATEGORIES.md).
+Compare with the v1 body slides where 6/10 categories looked identical. Now every single body slide has its own visual identity: different background, font, accent color, card style, and density.
+
+### Full Pipeline: Hook + Body + AI Diagram + Specialty
+
+<img src="docs/v2_full_comparison.png" width="100%" alt="Full v2 comparison: hook, body, AI diagram, and specialty slides for all 10 categories"/>
+
+Each category also has AI-generated mid-carousel diagrams (via Gemini 3 Pro) that match the category's visual language. The design language spec is defined in [`scripts/design_languages.py`](scripts/design_languages.py) -- a parameterized JSON format that any new category can populate.
+
+Full category framework with psychology axioms in [CATEGORIES.md](CATEGORIES.md).
 
 ---
 
