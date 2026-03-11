@@ -301,6 +301,48 @@ Full category framework with psychology axioms in [CATEGORIES.md](CATEGORIES.md)
 
 ---
 
+## Brand Management System
+
+The skill includes a full brand management system ([`scripts/brand_manager.py`](scripts/brand_manager.py)) that turns any Instagram channel into a persistent brand with its own unique design language.
+
+### How It Works
+
+1. **Onboarding Interview** -- 4 questions: niche, tone, visual energy, brand name
+2. **Automatic Design Language Derivation** -- Maps answers to 7-axis positions via derivation tables
+3. **AI Logo Generation** -- Creates a brand logo matching the derived design language
+4. **Persistent Memory** -- Saves brand identity, design language, and content log to `brands/{slug}/`
+5. **Content Tracking** -- Excel-based topic tracker with deduplication (no repeat topics)
+6. **Multi-Brand Support** -- Manage unlimited brands, each with a completely unique visual identity
+
+### Same Content, Different Brands
+
+<img src="docs/brand_comparison.png" width="100%" alt="Same content rendered with two different brand design languages"/>
+
+The same carousel content rendered with two brand design languages -- every visual element differs (background, font, accent color, card style, depth) while the content stays identical.
+
+### Brand Data Structure
+
+```
+brands/{slug}/
+├── brand.json              # Brand identity + design language
+├── logo.png                # AI-generated brand logo
+├── design_language.json    # 7-axis spec for renderer
+└── content_log.xlsx        # Topics covered + dates + metrics
+```
+
+### Derivation Table (Interview -> Design Language)
+
+| Interview Answer | Axes Affected | Example Mapping |
+|-----------------|---------------|-----------------|
+| **Tone: Authoritative** | Typography + Density + Depth | Palatino serif, balanced, flat |
+| **Tone: Edgy** | Typography + Density + Depth | Avant Garde, medium, flat |
+| **Niche: AI/Tech** | Color + Decoration | Purple accent, circuit pattern |
+| **Niche: Business** | Color + Decoration | Green/gold accent, clean rules |
+| **Energy: Dark Dramatic** | Layout + Rhythm + Background | Dark bg, organic, sharp 3pt corners |
+| **Energy: Warm Inviting** | Layout + Rhythm + Background | Cream bg, organic, round 5pt corners |
+
+---
+
 ## 7 Content Archetypes
 
 The skill auto-selects the best archetype based on your topic:
