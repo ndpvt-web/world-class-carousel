@@ -250,6 +250,35 @@ Single-person portrait + bold headline compositor (`compose_news_hook.py`). AI t
 
 ---
 
+## 10 Content Categories (Tested Visual DNA)
+
+Each category has a unique visual identity, tested and verified across hook images, body slides, and specialty slides. Average hook quality: **9.4/10**.
+
+### All 10 Hook Slides
+
+<img src="docs/category_hooks_grid.png" width="100%" alt="10 content category hook slides: Paper Decoder, Tool Showdown, Breaking News, Tool Tutorial, Hot Take, Prompt Playbook, Industry Map, Build This, Founders & Money, Future Scenario"/>
+
+| # | Category | Theme | Hook Style | Score | Primary Psychology |
+|---|----------|-------|-----------|-------|-------------------|
+| 1 | **Paper Decoder** | dark | Author portrait + floating paper panel | 9.5 | Authority (Cialdini) |
+| 2 | **Tool Showdown** | dark | Multi-screenshot face-off, split colors | 9.5 | Social Proof |
+| 3 | **Breaking News** | dark | Editorial portrait, red urgency accent | 9.0 | Scarcity/Urgency |
+| 4 | **Tool Tutorial** | clean | Phone-in-hand with app UI | 9.5 | Reciprocity |
+| 5 | **Hot Take** | dark | Abstract explosive dark energy | 9.0 | Controversy/Von Restorff |
+| 6 | **Prompt Playbook** | warm | Phone on desk, golden spotlight | 9.5 | Reciprocity |
+| 7 | **Industry Map** | dark | Multi-founder panoramic + data | 10.0 | Authority |
+| 8 | **Build This** | clean | Multi-device mockup, teal blueprint | 9.5 | Social Proof |
+| 9 | **Founders & Money** | earth | Founder portrait + green data panel | 9.5 | Authority |
+| 10 | **Future Scenario** | dark | Abstract futuristic aurora landscape | 9.0 | Awe/Curiosity |
+
+### Full Comparison (Hook + Body + Specialty)
+
+<img src="docs/category_full_comparison.png" width="100%" alt="Full 10-category comparison: hook slides, body slides, and specialty slides"/>
+
+Each category maps to a unique position in 4D space: Temporal (breaking-to-evergreen), Complexity (simple-to-deep), Emotion (practical-to-awe), Social (private-save-to-public-share). Full category framework in [CATEGORIES.md](CATEGORIES.md).
+
+---
+
 ## 7 Content Archetypes
 
 The skill auto-selects the best archetype based on your topic:
