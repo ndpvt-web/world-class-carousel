@@ -133,17 +133,53 @@ For each topic, determine the primary visual mode, background style, and which s
 | Capability | Quality | Best Use in Carousels | Prompt Strategy |
 |-----------|---------|----------------------|-----------------|
 | **Cinematic portraits** | Excellent | Hook/CTA backgrounds | 50+ words: materials, lighting, composition, colors, atmosphere |
+| **Multi-image composition** | Excellent (avg 9.6/10) | Hook slides with real faces + screenshots | Aristotelian axioms below. Send base64 to `/api/v1/images/generations` |
+| **Screenshot → device mockup** | Excellent | Tool showcase, product launch slides | "floating laptop/phone mockup, dark studio, reflective surface" |
+| **Person + screenshot editorial** | Excellent | News hooks with evidence | "person as SUBJECT, screenshot as floating holographic EVIDENCE panel" |
+| **Multi-screenshot dashboard** | Excellent | Comparison/versus slides | "floating panels at varied depths, color-coded edge glows, grid floor" |
 | **Flowcharts** | Excellent | Diagram slides as `ai_bg` | Describe boxes, arrows, labels, and connections structurally |
-| **Architecture diagrams** | Very good | Tech/system slides as `ai_bg` | Describe components, connections, layout style (blueprint, clean) |
-| **Bar charts / infographics** | Good | Data visualization slides | Specify exact data, colors, labels, chart type |
 | **Abstract backgrounds** | Excellent | Any slide background | Materials, colors, atmosphere, "no text no words" |
+
+#### The 7 Aristotelian Axioms for Multi-Image Composition (Experimentally Proven)
+
+These irreducible premises govern ALL multi-image prompts. Every prompt must satisfy all 7:
+
+**A1: VISUAL HIERARCHY** -- Eye processes: faces > contrast edges > text > color fields. Composition must respect this order.
+**A2: INPUT TYPE DETERMINES ROLE** -- Each input has exactly one role:
+- Photo of person → SUBJECT (preserve face, never modify)
+- Screenshot/UI → EVIDENCE (float as holographic panel, stylize frame, preserve content)
+- Logo/brand → ANCHOR (small, consistent corner placement)
+- Abstract/texture → ATMOSPHERE (background only)
+
+**A3: UNIFIED LIGHT SOURCE** -- All elements share one dominant light direction. Mixed lighting = instant "fake" detection.
+**A4: DEPTH CREATES DRAMA** -- Foreground sharp (subject), midground recessed (screenshots), background soft (atmosphere). 3 layers minimum.
+**A5: NEGATIVE SPACE IS FUNCTIONAL** -- Bottom 30-35% dark for text overlay. Not waste -- it's where the headline goes.
+**A6: COLOR TEMPERATURE = STORY** -- Cool blue/teal = innovation. Warm red = urgency. Split red/blue = competition. Mono + accent = editorial.
+**A7: NO-TEXT SEAL** -- Always end with "absolutely no text, no words, no letters, no watermarks" (outside screenshots).
+
+#### Proven Scenario Prompt Templates (avg 9.6/10 across 10 tests)
+
+**Person + News Screenshot** (9.5/10): "Image 1 is [person] -- preserve face, place in left 60%, dramatic side lighting. Image 2 is screenshot -- float as glowing translucent panel, tilted 8 degrees, recessed behind subject, cyan edge glow. Dark moody background, cinematic depth of field. Bottom 30% dark. No text outside screenshot."
+
+**Tool Screenshot Showcase** (9/10): "Place screenshot on sleek floating laptop mockup angled 15 degrees. Dark gradient background, ambient teal glow from screen. Glossy reflective surface below. Premium Apple product launch aesthetic. No text outside screenshot."
+
+**Multi-Screenshot Dashboard** (9.5/10): "Arrange as glowing panels floating in dark space, varied depths and angles (5-15 degrees). Largest centered. Color-coded edge glows. Grid floor, particle effects. Digital command center aesthetic. No text outside screenshots."
+
+**Person + Screenshots + Logo** (10/10): "Person as dominant subject center-left, face preserved. Screenshots as holographic panels around them. Logo small in upper corner with glow. Volumetric light rays, 3-layer depth. No text outside screenshots/logo."
+
+**Face-Off + Data** (10/10): "Person A on LEFT in profile facing right, red lighting. Person B on RIGHT facing left, blue lighting. Dashboard between them as floating holographic display. Smoke and sparks in the gap. Competitive energy. No text outside screenshot."
+
+**Phone in Hand** (10/10): "Screenshot on smartphone held in hand from lower-right. Dark background, soft bokeh lights. Screen bright and crisp. Lifestyle photography style. No text outside screenshot."
+
+**5-Image Mega** (10/10): "2 people (main foreground, secondary recessed) + 2 screenshots (holographic panels, color-coded glows) + logo (corner). Volumetric light, split lighting, multiple depth layers. No text outside screenshots/logo."
 
 **Prompt Rules**:
 - **HYPER-DETAILED** (50+ words): materials, lighting, composition, colors, atmosphere. Generic = bad.
-- **Always end with "no text, no words, no letters"** for backgrounds -- AI models add unwanted text otherwise.
-- For flowcharts/diagrams: describe the structural layout (boxes, arrows, labels, connections) explicitly.
-- For data charts: include exact numbers, company names, colors, chart type.
-- Abstract patterns > figurative images for text readability on slides.
+- **Always end with "absolutely no text, no words, no letters, no watermarks"** -- AI models add unwanted text otherwise.
+- **Declare each input's role explicitly** (per A2): "Image 1 is a portrait... Image 2 is a screenshot..."
+- **Specify depth map** (per A4): "subject sharp foreground, screenshots floating midground, atmospheric background"
+- **Lock light direction** (per A3): "single dominant light from upper-left, rim light on subject"
+- For editorial portraits: add "ABSOLUTELY NO TEXT NO LOGOS NO MAGAZINE ELEMENTS" or Gemini creates TIME covers.
 - Overlay opacity sweet spot: 0.60-0.68 for hooks, 0.55-0.65 for diagrams, 0.65-0.70 for CTA.
 
 #### Background Style Selection

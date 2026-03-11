@@ -214,6 +214,32 @@ Key insight: This is an **image sourcing + compositing problem**, not an AI gene
 
 ---
 
+### Multi-Image Composition (Aristotelian Stress Test)
+
+Gemini 3 Pro can orchestrate **any combination** of photos, screenshots, and logos into cinematic compositions. Tested across 10 scenarios with an average score of **9.6/10**.
+
+<table>
+<tr>
+<td align="center"><img src="docs/stress_s1_person_news.png" width="170"/><br/><sub>Person + News (9.5)</sub></td>
+<td align="center"><img src="docs/stress_s4_person_ss_logo.png" width="170"/><br/><sub>Person + SS + Logo (10)</sub></td>
+<td align="center"><img src="docs/stress_bonus1_faceoff.png" width="170"/><br/><sub>Face-Off + Data (10)</sub></td>
+<td align="center"><img src="docs/stress_bonus5_mega.png" width="170"/><br/><sub>5-Image Mega (10)</sub></td>
+</tr>
+</table>
+
+**7 Aristotelian Axioms** govern every prompt: visual hierarchy, input-role typing, unified light source, depth layering, functional negative space, color temperature storytelling, and the no-text seal.
+
+**Key pattern**: Declare each input's role explicitly in the prompt: *"Image 1 is a portrait — preserve face. Image 2 is a screenshot — float as glowing holographic panel."*
+
+```python
+# Send ANY mix of local images as base64 to Gemini
+python3 scripts/send_composition.py output.png \
+  "Aristotelian prompt here..." \
+  person.jpg screenshot.png logo.png
+```
+
+---
+
 ## 7 Content Archetypes
 
 The skill auto-selects the best archetype based on your topic:
