@@ -238,6 +238,16 @@ python3 scripts/send_composition.py output.png \
   person.jpg screenshot.png logo.png
 ```
 
+#### Full Stress Test Grid (10 scenarios)
+
+<img src="docs/gemini_stress_test_grid.png" width="100%" alt="Gemini multi-image composition stress test: 10 scenarios, avg 9.6/10"/>
+
+### News Hook Editorial Style (@therundownai)
+
+Single-person portrait + bold headline compositor (`compose_news_hook.py`). AI transforms any CC photo into a dramatic editorial portrait, then overlays auto-sized Inter Black headline.
+
+<img src="docs/news_hook_comparison.png" width="100%" alt="News hook style comparison: reference vs our generated results"/>
+
 ---
 
 ## 7 Content Archetypes
