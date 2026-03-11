@@ -45,17 +45,42 @@ Analyze the topic and auto-select the renderer theme:
 
 If the user specifies a brand config with a theme, always use that instead.
 
-#### Archetype Selection Guide
+#### Content Category Selection (10 Categories, Aristotelian)
 
-| If the topic is about... | Best Archetype | Example |
-|--------------------------|---------------|---------|
-| Steps to accomplish something | `tutorial` | "How to deploy with Vercel in 5 minutes" |
-| A reusable mental model | `framework` | "The 3-layer content system" |
-| Correcting a common belief | `myth_buster` | "Stop using RAG. There's a better way." |
-| A success story with data | `case_study` | "How we grew from 0 to 10K users" |
-| Top N tools/resources | `curated_list` | "6 AI tools that will replace your stack" |
-| Explaining a complex concept | `deep_dive` | "How transformers actually work" |
-| Before/after personal journey | `transformation` | "From burnout to 4-hour workdays" |
+Each category has unique visual DNA derived from psychology axioms (Cialdini, cognitive load theory, dual coding, serial position effect). Select based on topic:
+
+| If the topic is about... | Category | Arc Shape | Hook Style | Primary Cialdini |
+|--------------------------|----------|-----------|------------|------------------|
+| Explaining a research paper | `paper_decoder` | Revelatory | Face + paper panel | Authority |
+| Comparing AI tools/models | `tool_showdown` | Divergent | Multi-screenshot face-off | Social Proof |
+| Today's AI development | `breaking_news` | Convergent | News-editorial face | Scarcity |
+| Step-by-step AI tool how-to | `tool_tutorial` | Linear | Phone-in-hand / device mockup | Reciprocity |
+| Controversial opinion | `hot_take` | Confrontational | Bold abstract typography | Authority |
+| Copy-paste prompts/templates | `prompt_playbook` | Divergent | Phone screenshot mockup | Reciprocity |
+| Complete sector overview | `industry_map` | Divergent | Multi-person face-off | Authority |
+| Build [X] with AI project | `build_this` | Linear+Reveal | Multi-device result showcase | Social Proof |
+| Funding/business news | `founders_money` | Convergent | Founder portrait + data | Scarcity |
+| Future predictions/timeline | `future_scenario` | Revelatory | Abstract cinematic AI imagery | Scarcity |
+
+**Universal Psychology Rules (apply to ALL categories):**
+- Max 4 information chunks per slide (Cognitive Load Theory, Sweller)
+- Pattern interrupt every 2-3 slides (diagram, comparison, color shift, or layout change)
+- Density wave: H-M-H-M-H-H-M (never 3 high-density slides consecutively)
+- Synthesis slide = THE save trigger (Serial Position Effect: last items remembered best)
+- Dual-code the hardest concept (Paivio: visual + text = 6.5x retention)
+- CTA matches save trigger: utility categories → "Save this", social categories → "Share/Comment"
+
+**Category-to-Slide-Sequence Quick Reference:**
+- `paper_decoder` (9 slides): hook → body → **diagram** → body → body → **diagram** → body → synthesis → cta
+- `tool_showdown` (8 slides): hook → body → **comparison** → body → body → **comparison** → synthesis → cta
+- `breaking_news` (8 slides): hook → body → body → body → **diagram** → body → synthesis → cta
+- `tool_tutorial` (8 slides): hook → body → **tool** → **tool** → **tool** → body → synthesis → cta
+- `hot_take` (7 slides): hook → body → body → body → body → synthesis → cta (text-driven, no diagrams)
+- `prompt_playbook` (9 slides): hook → body → body → body → **comparison** → body → body → synthesis → cta
+- `industry_map` (9 slides): hook → **diagram** → body → body → body → **comparison** → **diagram** → synthesis → cta
+- `build_this` (8 slides): hook → body → **tool** → **tool** → **tool** → body → synthesis → cta
+- `founders_money` (7 slides): hook → body → body → body → **diagram** → synthesis → cta
+- `future_scenario` (8 slides): hook → body → body → **diagram** → body → body → synthesis → cta
 
 #### Role-to-SlideType Mapping
 
