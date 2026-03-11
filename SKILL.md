@@ -462,7 +462,25 @@ python3 ~/.claude/skills/generate-image/scripts/generate_image.py \
   --model "google/gemini-3-pro-image-preview" --output tmp/carousel/hook_base.png
 ```
 
-**Step 2: Compose with PIL overlay** (gradient + headline + brand + CTA):
+**Step 2a: News-editorial style** (matches @therundownai -- single person, big headline):
+```bash
+python3 scripts/compose_news_hook.py \
+  --base tmp/carousel/hook_base.png \
+  --output tmp/carousel/slide_01_hook.png \
+  --headline "OpenAI just hit $13B ARR making it the fastest-growing software company in history" \
+  --category "AI NEWS" \
+  --brand "@DailyAINews"
+```
+
+The `compose_news_hook.py` script (editorial style):
+- Subtle bottom gradient (ease-in, configurable start/strength)
+- Small category label above headline
+- MASSIVE bold headline (Inter Black, auto-sized 42-72px to fill bottom 35%)
+- Optional brand mark top-left
+- Clean, minimal -- no slide counter, no CTA, no subhead
+- Best for: single-person portrait + news headline
+
+**Step 2b: Multi-person viral style** (compose_hook.py -- multi-person, full overlay):
 ```bash
 python3 scripts/compose_hook.py \
   --base tmp/carousel/hook_base.png \
@@ -473,7 +491,7 @@ python3 scripts/compose_hook.py \
   --category "AI NEWS"
 ```
 
-The `compose_hook.py` script adds:
+The `compose_hook.py` script (viral style):
 - Bottom gradient overlay (0-220 alpha, ease-in curve) for text readability
 - Light top gradient for brand area
 - Category label (upper-left, e.g., "AI NEWS")
@@ -482,6 +500,7 @@ The `compose_hook.py` script adds:
 - Optional subheadline
 - "SWIPE FOR MORE" CTA with decorative line
 - Slide counter (top-right, "1/8")
+- Best for: multi-person compositions, face-off style
 
 **Prompt Strategy by Topic Type:**
 
