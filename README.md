@@ -550,3 +550,12 @@ MIT
   <em>Built with first-principles reasoning. Every decision traces to an axiom.</em><br/>
   <em>Content people save, share, and come back to. Not engagement bait. Not AI slop.</em>
 </p>
+
+---
+
+## Keywords
+
+> *For the search engines and the curious humans who find things by typing random words*
+
+Instagram carousel generator, AI carousel maker, social media content creator, LaTeX slide generator, Instagram post template, carousel design tool, AI image carousel, publication-ready carousel, content creation AI, Instagram marketing tool, social media automation, Gemini AI images, TikZ graphics, professional carousel, influencer content tool, Claude Code skill
+
